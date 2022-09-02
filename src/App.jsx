@@ -21,8 +21,15 @@ function App() {
   }
   function onSubmitHandler(e) {
     e.preventDefault();
-    
+    const returnMoney = (currentPrice - initialPrice) * stockQuantity
+    const percent  = ((returnMoney / initialPrice) * 100).toFixed(2)
+    if(returnMoney >= 0) {
+      setResult(`Hey, the profit is Rs ${returnMoney} and the profit percent is ${percent}%`)
+    } else {
+      setResult(`Hey, the loss is Rs ${-(returnMoney)} and the loss percent is ${-percent}%`)
+    }
   }
+
   function resetHandler(e) {
     setInitialPrice("");
     setStockQuantity("");
