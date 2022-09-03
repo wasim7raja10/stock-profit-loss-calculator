@@ -40,7 +40,7 @@ function App() {
   return (
     <>
       <main>
-        <h1>Is your initialPrice Lucky?</h1>
+        <h1>Stock Profit/Loss</h1>
         <form onSubmit={onSubmitHandler} onReset={resetHandler}>
           <div className="initialPrice">
             <label htmlFor="initialPrice">Initial Price</label>
