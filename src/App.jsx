@@ -22,8 +22,10 @@ function App() {
   }
   function onSubmitHandler(e) {
     e.preventDefault();
-    if (!validateInput(initialPrice, currentPrice, stockQuantity))
+    if (!validateInput(initialPrice, currentPrice, stockQuantity)) {
       setResult("Invalid inputs");
+      return;
+    }
     const returnMoney = (currentPrice - initialPrice) * stockQuantity;
     const percent = ((returnMoney / initialPrice) * 100).toFixed(2);
     if (returnMoney >= 0) {
