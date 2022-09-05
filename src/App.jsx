@@ -1,14 +1,15 @@
 import { useState } from "react";
 import "./App.css";
-import twitterLogo from "./icons/002-twitter.png"
-import githubLogo from "./icons/003-github.png"
-import linkedinLogo from "./icons/001-linkedin.png"
+import twitterLogo from "./icons/002-twitter.png";
+import githubLogo from "./icons/003-github.png";
+import linkedinLogo from "./icons/001-linkedin.png";
+import { validateInput } from "./helper/helperfunctions";
 
 function App() {
   const [initialPrice, setInitialPrice] = useState("");
   const [stockQuantity, setStockQuantity] = useState("");
-  const [currentPrice, setCurrentPrice] = useState("")
-  const [result, setResult] = useState("")
+  const [currentPrice, setCurrentPrice] = useState("");
+  const [result, setResult] = useState("");
 
   function onInitialPriceChangeHandler(e) {
     setInitialPrice(e.target.value);
@@ -17,24 +18,30 @@ function App() {
     setStockQuantity(e.target.value);
   }
   function onCurrentPriceChangeHandler(e) {
-    setCurrentPrice(e.target.value)
+    setCurrentPrice(e.target.value);
   }
   function onSubmitHandler(e) {
     e.preventDefault();
-    const returnMoney = (currentPrice - initialPrice) * stockQuantity
-    const percent  = ((returnMoney / initialPrice) * 100).toFixed(2)
-    if(returnMoney >= 0) {
-      setResult(`Hey, the profit is Rs ${returnMoney} and the profit percent is ${percent}%`)
+    if (!validateInput(initialPrice, currentPrice, stockQuantity))
+      setResult("Invalid inputs");
+    const returnMoney = (currentPrice - initialPrice) * stockQuantity;
+    const percent = ((returnMoney / initialPrice) * 100).toFixed(2);
+    if (returnMoney >= 0) {
+      setResult(
+        `Hey, the profit is Rs ${returnMoney} and the profit percent is ${percent}%`
+      );
     } else {
-      setResult(`Hey, the loss is Rs ${-(returnMoney)} and the loss percent is ${-percent}%`)
+      setResult(
+        `Hey, the loss is Rs ${-returnMoney} and the loss percent is ${-percent}%`
+      );
     }
   }
 
   function resetHandler(e) {
     setInitialPrice("");
     setStockQuantity("");
-    setCurrentPrice("")
-    setResult("")
+    setCurrentPrice("");
+    setResult("");
   }
 
   return (
@@ -80,7 +87,9 @@ function App() {
         {result && <h2>{result}</h2>}
       </main>
       <footer>
-        <h6>created by <a href="https://wasimraja.me/portfolio">Wasim Raja</a></h6>
+        <h6>
+          created by <a href="https://wasimraja.me/portfolio">Wasim Raja</a>
+        </h6>
         <ol>
           <li>
             <a
