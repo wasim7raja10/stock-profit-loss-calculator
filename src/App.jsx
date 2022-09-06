@@ -27,7 +27,7 @@ function App() {
       return;
     }
     const returnMoney = (currentPrice - initialPrice) * stockQuantity;
-    const percent = ((returnMoney / initialPrice) * 100).toFixed(2);
+    const percent = ((returnMoney / (initialPrice*stockQuantity)) * 100).toFixed(2);
     if (returnMoney >= 0) {
       setResult(
         `Hey, the profit is Rs ${returnMoney} and the profit percent is ${percent}%`
